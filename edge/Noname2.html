@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="Keywords" content="" />
+  <meta name="Description" content="" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta content="telephone=no" name="format-detection" />
+  <meta content="email=no" name="format-detection" />
+  <title>Document</title>
+ </head>
+ <body>
+   <textarea style="width:300px;height:600px;">
+     body.formPage{background-color:#EEE;
+transform: all 10s;
+transition:all opacity ease-in-out;
+}
+.kk{transition: transform 10s;}
+
+@keyframes adf-112{
+  from {top:0px;transform:translatex(100%);}
+  to {top:200px;transform:translatex(0);}
+}
+.example1 {
+   background:linear-gradient(top,#ccc,rgba(255,255,255,.8));
+}
+.bb{color:red;}
+
+
+/* form */
+   </textarea>
+  <script>
+
+    var PREFIX={
+       webkit:"-webkit-",
+       moz:"-moz-",
+       o:"-o-"
+    };
+
+    var transition=/\btransition(?:-[^:]+?)*:[^;\}]+?(?=;|\})/mg;
+    var animation=/\b(animation(?:-[^:]+?)*:)([^;\}]+?)(?=;|\})/mg;
+    var transform=/\btransform(?:-[^:]+?)*:[^;\}]+?(?=;|\})/mg;
+    var linear_gradient=/\b(background(?:-image)*\s*:)\s*(linear-gradient\s*\([\s\S]*?)(?=;|\})/mg;
+    var keyframes=/@keyframes\s+[^{]+?\{(?:\{[^}]*?\}|[^}])*\}/mg;
+    
+    var txt=document.querySelector("textarea").value;
+    txt=txt.replace(transition,function(a){
+       var out="-webkit-";
+           out+=a.replace(/\b(transform)\b/,"-webkit-$1");
+           out+=";";
+
+           out+="-moz-";
+           out+=a.replace(/\b(transform)\b/,"-moz-$1");
+           out+=";";
+
+           out+="-o-";
+           out+=a.replace(/\b(transform)\b/,"-o-$1");
+           out+=";";
+
+           out+=a;
+           return out;
+    }).replace(animation,function(a,b,c){
+       var out="-webkit-";
+           out+=b;
+           out+="-webkit-";
+           out+=c'
+           out+=";";
+
+           out="-moz-";
+           out+=b;
+           out+="-moz-";
+           out+=c'
+           out+=";";
+
+           out="-o-";
+           out+=b;
+           out+="-o-";
+           out+=c'
+           out+=";";
+
+           out+=a;
+           return out;
+    }).replace(transform,function(a){
+      var out="-webkit-";
+           out+=a;
+           out+=";"
+
+           out+="-moz-";
+           out+=a;
+           out+=";"
+
+           out+="-o-";
+           out+=a;
+           out+=";"
+
+           out+=a;
+           return out;
+    }).replace(linear_gradient,function(a,b,c){
+       var out=b;
+           out+="-webkit-";
+           out+=c;
+           out+=";"
+
+           out+=b;
+           out+="-moz-";
+           out+=c;
+           out+=";"
+
+           out+=b;
+           out+="-o-";
+           out+=c;
+           out+=";"
+
+           out+=a;
+           return out;
+
+    }).replace(keyframes,function(a){
+      var out="@-webkit-",kfs=a.substr(1);
+          out+=kfs;
+
+          out+="@-moz-",kfs=a.substr(1);
+          out+=kfs;
+
+          out+="@-o-",kfs=a.substr(1);
+          out+=kfs;
+
+          out+=a;
+      return out;
+    });
+    console.log(txt);
+  </script>
+ </body>
+</html>
