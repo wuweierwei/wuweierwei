@@ -3,7 +3,7 @@
 var spawn=require("child_process").spawn,
     fs=require("fs"),
     path=require("path"),
-    cssRule=require(__dirname+"/cssRule"),
+    cssRule=require("./cssRule"),
     jar;
  
  fs.readdirSync(__dirname).some(function(file){
