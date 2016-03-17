@@ -2,9 +2,8 @@
 "use strict";
 var fs=require("fs"),
     path=require("path"),
-    root=path.dirname(__dirname),
-    config=require(root+"/config"),
-    compress=require(root+"/lib/compressor"),
+    config=require("../config"),
+    compress=require("./compressor"),
     charset=config.charset||"utf8";
 
   function watch(realpath,outpath){
