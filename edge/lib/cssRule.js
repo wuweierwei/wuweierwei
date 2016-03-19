@@ -41,16 +41,6 @@ function _transition(transition){
     return out;
 }
 
-//处理animation
-function _animation(animation,left,keyframes_name){
-     var out=`${_WEBKIT_}${left}${_WEBKIT_}${keyframes_name};
-            ${_MOZ_}${left}${_MOZ_}${keyframes_name};
-            ${_O_}${left}${_O_}${keyframes_name};
-            ${animation}`;
-
-    return out;
-}
-
 //处理背景渐变
 function _gradient(a,b,c){
      var out=`${b}${_WEBKIT_}${c};
@@ -69,8 +59,8 @@ var css={};
     fn:_transition
   },
   {
-    reg:/\b(animation(?:-[^:]+?)*:)([^;\}]+?)(?=;|\})/mg,  //animation
-    fn:_animation
+    reg:regCompile(/\banimation(?:-[^:]+?)*:[^;\}]+?(?=;|\})/mg),  //animation
+    fn:_usually
   },
   {
       reg:transformReg,                         //transform
